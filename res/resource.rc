@@ -18,7 +18,7 @@ BEGIN
     BEGIN
         BLOCK "040904B0"
         BEGIN
-            VALUE "FileDescription",  "Edit selected text with Vim"
+            VALUE "FileDescription",  "Vim Anywhere for Windows"
             VALUE "FileVersion",      APP_VERSION
             VALUE "InternalName",     "VimAnywhereForWindows"
             VALUE "LegalCopyright",   "Copyright (C) 2026 Chooyy. MIT License."

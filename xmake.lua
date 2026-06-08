@@ -15,4 +15,4 @@ target("vim-anywhere-for-windows")
 
     add_cxflags("/GR-")
     add_ldflags("/SUBSYSTEM:WINDOWS")
-    add_syslinks("user32", "gdi32", "shell32", "ole32", "oleaut32", "advapi32")
+    add_syslinks("user32", "gdi32", "shell32", "advapi32")

@@ -11,7 +11,6 @@
 #include <shellapi.h>
 
 #include <array>
-#include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <string>
@@ -246,6 +245,21 @@ void show_tray_menu(HWND hwnd) {
 }
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    static const UINT uTaskbarRestart = RegisterWindowMessageW(L"TaskbarCreated");
+
+    if (msg == uTaskbarRestart) {
+        NOTIFYICONDATAW nid  = {sizeof(NOTIFYICONDATAW)};
+        nid.cbSize           = sizeof(NOTIFYICONDATAW);
+        nid.hWnd             = hwnd;
+        nid.uID              = ID_TRAY;
+        nid.uFlags           = NIF_ICON | NIF_TIP | NIF_MESSAGE;
+        nid.uCallbackMessage = WM_TRAYICON;
+        nid.hIcon            = LoadIconW(GetModuleHandleW(nullptr), MAKEINTRESOURCEW(IDI_ICON));
+        wcsncpy_s(nid.szTip, L"Vim Anywhere for Windows (Ctrl+Alt+E)", _TRUNCATE);
+        Shell_NotifyIconW(NIM_ADD, &nid);
+        return 0;
+    }
+
     switch (msg) {
     case WM_HOTKEY:
         run();
